@@ -5,6 +5,7 @@ metadata:
   namespace: recette
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
   rules:
     - host: guestbook.rec.aurelops.com
@@ -17,3 +18,8 @@ spec:
                 name: guestbook-ui
                 port:
                   number: 80
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - guestbook.rec.aurelops.com
+      secretName: guestbook-server-tls
